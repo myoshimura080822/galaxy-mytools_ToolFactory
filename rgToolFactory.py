@@ -96,6 +96,9 @@ verbose = False
 debug = False
 toolFactoryURL = 'https://bitbucket.org/fubar/galaxytoolfactory'
 
+reload(sys)
+sys.setdefaultencoding('utf8')
+
 # if we do html we need these dependencies specified in a tool_dependencies.xml file and referred to in the generated
 # tool xml
 toolhtmldepskel = """<?xml version="1.0"?>
@@ -670,7 +673,7 @@ o.close()
             print >> sys.stdout, stdout_data
 
  	    if retval <> 0 and err: # problem
-                    print >> sys.stderr,err
+                    print >> sys.stderr,err.encode('raw_unicode_escape').decode('ascii')
 
             if self.opts.make_HTML:
                 self.makeHtml()
